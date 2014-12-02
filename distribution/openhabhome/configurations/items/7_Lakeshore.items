@@ -1,0 +1,52 @@
+Group All
+Group gFF 		(All)
+Group gSF 		(All)
+Group Outdoor 	(All)
+Group Weather 	(All)
+Group Status 	(All)
+
+Group FF_Living 	"Living Room" 	        <video> 	(gFF)
+Group FF_Kitchen 	"Kitchen" 		        <kitchen> 	(gFF)
+Group FF_Hallway 	"Hallway" 		        <corridor> 	(gFF)
+Group FF_Master 	"Master Bedroom" 		<bedroom> 	(gFF)
+Group FF_Bedroom 	"Reichert's Bedroom" 	<bedroom> 	(gFF)
+
+Group SF_Bedroom 	"Upstairs Bedroom" 		<bedroom> 	(gSF)
+
+/* active groups */
+Group:Switch:OR(ON, OFF) 		Lights 		"All Lights [(%d)]" 								(All)
+Group:Contact:OR(OPEN, CLOSED) 	Windows 	"Open windows [(%d)]"				<contact>		(All)
+
+/* Lights */
+Switch Light_FF_Living_Wall		 	"Sconce" 				(FF_Living, Lights)
+Switch Light_FF_Hallway_Ceiling 	"Corridor" 				(FF_Hallway, Lights)
+Switch Light_FF_Master_Ceiling 		"Ceiling" 				(FF_Master, Lights)
+Switch Light_FF_Bedroom_Ceiling 	"Ceiling" 				(FF_Bedroom, Lights)
+
+Switch Light_Outdoor_Patio 		    "Patio" 				(Outdoor, Lights)
+Switch Light_Outdoor_Porch	 		"Porch"					(Outdoor, Lights)
+
+/* Windows */
+Contact Window_FF_Frontdoor 		"Frontdoor [MAP(en.map):%s]"		(FF_Living, Windows)
+Contact Window_FF_Picture_Window 	"Picture Window [MAP(en.map):%s]"	(FF_Living, Windows)
+
+Group Weather_Chart													(Weather)
+Number Weather_Temperature 		"Outside Temperature [%.1f °C]"	<temperature> (Weather_Chart) { http="<[http://weather.yahooapis.com/forecastrss?w=638242&u=c:60000:XSLT(yahoo_weather_temperature.xsl)]" }
+Number Weather_Temp_Max 		"Todays Maximum [%.1f °C]"	<temperature> (Weather_Chart)
+Number Weather_Temp_Min 		"Todays Minimum [%.1f °C]"	<temperature> (Weather_Chart)
+Number Weather_Chart_Period		"Chart Period"
+DateTime Weather_LastUpdate		"Last Update [%1$ta %1$tR]"	<clock>
+
+/* NTP binding demo item */
+DateTime		Date			"Date [%1$tA, %1$td.%1$tm.%1$tY]"	<calendar>	{ ntp="Europe/Berlin:de_DE" }
+
+/* Demo items */
+Switch DemoSwitch				"Switch"
+Dimmer DimmedLight				"Dimmer [%d %%]"		<slider>
+Color  RGBLight					"RGB Light"				<slider>
+Rollershutter DemoShutter	 	"Roller Shutter"
+Dimmer DemoBlinds			 	"Blinds [%d %%]"		<rollershutter>
+Number Scene_General			"Scene"					<sofa>
+Number Radio_Station			"Radio"					<network>
+Dimmer Volume 					"Volume [%.1f %%]"
+Number Temperature_Setpoint		"Temperature [%.1f °C]" <temperature>
